@@ -6,14 +6,23 @@ using UnityEngine;
 
 [System.Serializable]
 public class BulletPoolManager : MonoBehaviour
-{
+{   
     public GameObject bullet;
-
+    public int POOL_SIZE;
+    public List<GameObject> poolOfBullets;
     //TODO: create a structure to contain a collection of bullets
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        poolOfBullets = new List<GameObject>();
+        for (int i=0;i<POOL_SIZE;i++)
+        {
+            GameObject obj = (GameObject)Instantiate(bullet); 
+            obj.SetActive(false);
+            poolOfBullets.Add(obj);
+        }
         // TODO: add a series of bullets to the Bullet Pool
     }
 
@@ -26,8 +35,14 @@ public class BulletPoolManager : MonoBehaviour
     //TODO: modify this function to return a bullet from the Pool
     public GameObject GetBullet()
     {
-
-        return bullet;
+        for (int i = 0; i<poolOfBullets.Count;i++)
+        {
+            if(!poolOfBullets[i].activeInHierarchy)
+            {
+                return poolOfBullets[i];
+            }
+        }
+        return null;
     }
 
     //TODO: modify this function to reset/return a bullet back to the Pool 
