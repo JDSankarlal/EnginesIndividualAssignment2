@@ -16,17 +16,19 @@ public class PlayerController : MonoBehaviour
     private AudioSource _thunderSound;
     private AudioSource _yaySound;
     private AudioSource _bulletSound;
+    private BulletPoolManager bulletPoolManager;
 
     private bool isFiring = false;
 
-    //TODO: create a reference to the BulletPoolManager here
 
+    //TODO: create a reference to the BulletPoolManager here
     // Start is called before the first frame update
     void Start()
     {
         _thunderSound = gameController.audioSources[(int)SoundClip.THUNDER];
         _yaySound = gameController.audioSources[(int)SoundClip.YAY];
         _bulletSound = GetComponent<AudioSource>();
+        bulletPoolManager = GetComponent<BulletPoolManager>();
 
         // Shoots bullet on a delay if button is pressed
         StartCoroutine(FireBullet());
@@ -115,11 +117,13 @@ public class PlayerController : MonoBehaviour
             {
                 _bulletSound.Play();
 
+                GameObject tempBullet = bulletPoolManager.GetBullet();
+                tempBullet.transform.position = bulletSpawn.position;
                 //TODO: this code needs to change to user the BulletPoolManager's
                 //TODO: GetBullet function which will return a reference to a 
                 //TODO: bullet object. 
                 //TODO: Ensure you position the new bullet at the bulletSpawn position
-                Instantiate(bullet, bulletSpawn.position, Quaternion.identity);
+                //Instantiate(bulletPoolManager.GetBullet(), bulletSpawn.position, Quaternion.identity);
             }
 
         }

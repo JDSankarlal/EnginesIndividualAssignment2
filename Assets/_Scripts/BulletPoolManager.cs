@@ -35,14 +35,9 @@ public class BulletPoolManager : MonoBehaviour
     //TODO: modify this function to return a bullet from the Pool
     public GameObject GetBullet()
     {
-        for (int i = 0; i<poolOfBullets.Count;i++)
-        {
-            if(!poolOfBullets[i].activeInHierarchy)
-            {
-                return poolOfBullets[i];
-            }
-        }
-        return null;
+        GameObject firstBullet = poolOfBullets[0];
+        poolOfBullets.RemoveAt(0);
+        return firstBullet;
     }
 
     //TODO: modify this function to reset/return a bullet back to the Pool 
