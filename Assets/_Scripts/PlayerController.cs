@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource _thunderSound;
     private AudioSource _yaySound;
     private AudioSource _bulletSound;
-    private BulletPoolManager bulletPoolManager;
+    public BulletPoolManager bulletPoolManager;
 
     private bool isFiring = false;
 
@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour
         _thunderSound = gameController.audioSources[(int)SoundClip.THUNDER];
         _yaySound = gameController.audioSources[(int)SoundClip.YAY];
         _bulletSound = GetComponent<AudioSource>();
-        bulletPoolManager = GetComponent<BulletPoolManager>();
 
         // Shoots bullet on a delay if button is pressed
         StartCoroutine(FireBullet());
@@ -119,6 +118,7 @@ public class PlayerController : MonoBehaviour
 
                 GameObject tempBullet = bulletPoolManager.GetBullet();
                 tempBullet.transform.position = bulletSpawn.position;
+                
                 //TODO: this code needs to change to user the BulletPoolManager's
                 //TODO: GetBullet function which will return a reference to a 
                 //TODO: bullet object. 
