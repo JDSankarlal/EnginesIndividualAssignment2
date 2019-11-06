@@ -7,11 +7,14 @@ public class BulletController : MonoBehaviour
 {
     public float bulletSpeed = 0.1f;
     public Boundary boundary;
+    public BulletPoolManager bulletPoolManager;
+
 
     //TODO: create a reference to the BulletPoolManager
 
     void Start()
     {
+        bulletPoolManager = GameObject.FindWithTag("Manager").GetComponent<BulletPoolManager>();
         boundary.Top = 2.45f;
     }
 
@@ -34,7 +37,7 @@ public class BulletController : MonoBehaviour
         {
             //TODO: This code needs to change to use the BulletPoolManager's
             //TODO: ResetBullet function which will return the bullet to the pool
-            Destroy(this.gameObject);
+            bulletPoolManager.ResetBullet(this.gameObject);
         }
     }
 }

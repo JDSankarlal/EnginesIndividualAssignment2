@@ -45,6 +45,7 @@ public class BulletPoolManager : MonoBehaviour
     //TODO: modify this function to reset/return a bullet back to the Pool 
     public void ResetBullet(GameObject bullet)
     {
-
+        bullet.SetActive(false);
+        poolOfBullets.Add(bullet);
     }
 }
